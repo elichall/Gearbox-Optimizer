@@ -8,7 +8,7 @@ import time
 
 startTime = time.perf_counter()
 
-sysConfigArray = [[0, 1, [[1,1]]], [1, 2, [[0,0],[2,0]]], [1, 1, [[1,0]]]]
+sysConfigArray = [[0, 1, [[1,1]]], [1, 2, [[2,0],[0,0]]], [1, 1, [[1,0]]]]
 
 gearBox = GearBox(SYS_POWER, INPUT_SPEED, OUTPUT_SPEED, LIFE_REQUIRED_IN, sysConfigArray)
 

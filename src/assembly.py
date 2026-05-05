@@ -102,9 +102,26 @@ class GearBox:
                 print(f"  -> Target: {self.outputSpeed}, Actual: {self.shaftContainer[-1].speed}")
             return False
 
-        # Check Spacing
+        # initalize the objects
         for shaft in self.shaftContainer:
             shaft.init()
+            
+        # set meshing gear width's equal
+        for gear in self.gearContainer:
+            matingIdx = gear.meshingId
+            
+            width = gear.width
+            matingWidth = self.gearContainer[matingIdx].width
+            if debug:
+                print(f"DEBUG: Gear Widths:")
+                print(f"  -> Gear {gear.id}: {width}, Mating {matingIdx}: {matingWidth}")
+            
+            if width < matingWidth:
+                gear.width = matingWidth
+                gear.findFOS()
+                
+        # Check Spacing
+        for shaft in self.shaftContainer:
             if shaft.initalValidMountCheck(debug=debug) != True:
                 if debug: 
                     print(f"DEBUG: ❌ Spacing Failed on Shaft {shaft.id}.")

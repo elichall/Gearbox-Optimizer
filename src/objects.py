@@ -582,6 +582,7 @@ class Gear:
         
         self.Sn = None
         self.width = None 
+        self.FOS = 1
         
         # net vectors
         self.gravityForce = None
@@ -644,6 +645,15 @@ class Gear:
             currentMountingFactor = self.mountingFactor(b)
         
         return b / 39.3701
+    
+    def findFOS(self): # after assigning a new width
+        Km = self.mountingFactor(self.width * 39.3701)
+        
+        Ft_lbf = self.Ft * 0.224809
+        Sn_psi = self.Sn * 0.000145038
+        
+        stress = Ft_lbf * self.pitch / self.width / self.J * self.Kv * self.Ko * Km   
+        self.FOS = Sn_psi / stress
     
     # stress functions
     def velocityFactor(self):
